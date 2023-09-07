@@ -1,0 +1,6 @@
+
+    <svg width="200" height="100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="90" cy="50" r="50" fill=undefined></circle>
+        <text  x="75" y="50" font-size="16" fill=undefined>undefined</text>
+    </svg>
+        
