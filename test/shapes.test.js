@@ -1,21 +1,44 @@
 const fs = require('fs');
 const { JSDOM } = require('jsdom')
-
-function readSVGFile(filePath) {
-    const svgString = fs.readFileSync(filePath, 'utf-8');
-    const dom = new JSDOM(svgString);
-    return dom.window.document.querySelector('svg');
-};
+const { SVGGenerator } = require('/Users/kalan/bootcamp/Challenges/Logo-Generator/lib/shapes.js');
+const { parse } = require('svg-parser');
 
 
-describe('SVG Shapes and Text', () => {
-    test('Circle should have correct attributes', () => {
-      const circleSVG = readSVGFile('./a.svg');
-      const circleElement = circleSVG.querySelector('circle');
-  
-      // Add your assertions here to test the circle and text elements
-      expect(circleElement).toHaveAttribute('cx', '90');
-      expect(circleElement).toHaveAttribute('cy', '50');
-      expect(circleElement).toHaveAttribute('r', '50');
-      })
+describe ('SVGGenerator', () => {
+    let svgGenerator;
+
+    beforeAll(() => {
+     svgGenerator = new SVGGenerator();
+
+    });
+
+    it('should generate SVG for circle', ()=> {
+        const shape = 'Circle';
+        const color = 'blue';
+        const textColor = 'white';
+        const letters = 'KDJ';
+
+        const svg = svgGenerator.generateShape(shape, color, textColor, letters);
+       expect(svgGenerator.generateSHape).toHaveBeenCalledWith(shape, color, textColor, letters);
+    });
+    it('should generate Circle with correct position', () => {
+        const shape = 'Circle';
+        const color = 'blue';
+        const textColor = 'white';
+        const letters = 'KDJ';
+
+        const svgString = generateSVG(shape, color, textColor, letters);
+        const parsedSVG = parse(svgString);
+
+        const circle = parsedSVG.children.find((child) => child.tagName === 'circle');
+        const text = parsedSVG.children.find((child) => child.tagName === 'text');
+
+        expect(circle.properties.cx).toBe('90');
+        expect(circle.properties.cy).toBe('50');
+        expect(text.properties.x).toBe('75');
+        expect(text.properties.y).toBe('50');
+
+    });
+
+
 });

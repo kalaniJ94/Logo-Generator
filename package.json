@@ -26,10 +26,7 @@
     "jest": "^29.6.4",
     "jsdom": "^22.1.0"
   },
-  "jest": {
-    "setupFiles": [
-      "./test/jest.setup.js"
-    ],
-    "testEnvironment": "jsdom"
+  "devDependencies": {
+    "svg-parser": "^2.0.4"
   }
 }

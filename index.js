@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-const { SVGGenerator, generateSVG  } = require('./lib/shapes.js');
+const { SVGGenerator, generateSVG } = require('./lib/shapes.js');
 
 
 const questions = [
@@ -34,7 +34,12 @@ function init() {
     .prompt(questions)
     .then((data) => {
         console.log(data);
-        let logoData = generateSVG(data.shape, data.color, data.letters, data.textColor);
+        if(data.letters.length != 3){
+            throw new Error("Please enter three letters for the logo.");
+        };
+        const color = data.color.toLowerCase();
+        const textColor = data.textColor.toLowerCase();
+        let logoData = generateSVG(data.shape, color, textColor, data.letters,);
         const filename = 'logo.svg'
         
         fs.writeFile(filename, logoData, (err) => 
