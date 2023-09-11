@@ -18,7 +18,7 @@ const questions = [
     {
         type: "input",
         name: "letters",
-        message: "Please enter up to three characters to use in the logo.",
+        message: "Please enter three characters to use in the logo.",
     },
     {
         type: "input",
@@ -46,28 +46,76 @@ function compileSVG(shape, data) {
     if (shape === "Circle") {
         const circle = new Circle(data.color, data.textColor, data.letters)
         let SVGString = circle.render() + circle.insertCircleSVG() + circle.insertText()
-        const filename = 'logo.svg'
-        fs.writeFile(filename, SVGString, (err) =>
-            err ? console.log(err) : console.log('Check out your logo!'))
+        const filename = 'logo.html'
+        fs.readFile(filename, 'utf8', (err, template) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
 
+            // Replace the placeholder with the SVG content
+            const htmlWithSVG = template.replace('PLACEHOLDER_FOR_SVG_CONTENT', SVGString);
 
+            const outputFile = 'compiled_logo.html';
+            fs.writeFile(outputFile, htmlWithSVG, (err) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                console.log(`Check out your compiled logo in ${outputFile}`);
+            });
+        });
     }
+
+
+
+    
     else if (shape === "Triangle") {
         const triangle = new Triangle(data.color, data.textColor, data.letters)
 
         let SVGString = triangle.render() + triangle.insertTriangleSVG() + triangle.insertText();
-        const filename = 'logo.svg'
-        fs.writeFile(filename, SVGString, (err) =>
-            err ? console.log(err) : console.log('Check out your logo!'))
+        const filename = 'logo.html'
+        fs.readFile(filename, 'utf8', (err, template) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+
+            const htmlWithSVG = template.replace('PLACEHOLDER_FOR_SVG_CONTENT', SVGString);
+
+            const outputFile = 'compiled_logo.html';
+            fs.writeFile(outputFile, htmlWithSVG, (err) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                console.log(`Check out your compiled logo in ${outputFile}`);
+            });
+        });
 
     }
     else if (shape === "Rectangle"){
         const rectangle = new Square(data.color, data.textColor, data.letters)
         let SVGString = rectangle.render() + rectangle.insertSquareSVG() + rectangle.insertText();
-        const filename = 'logo.svg'
-        fs.writeFile(filename, SVGString, (err) =>
-            err ? console.log(err) : console.log('Check out your logo!'))
+        const filename = 'logo.html'
+        fs.readFile(filename, 'utf8', (err, template) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+
+            const htmlWithSVG = template.replace('PLACEHOLDER_FOR_SVG_CONTENT', SVGString);
+
+            const outputFile = 'compiled_logo.html';
+            fs.writeFile(outputFile, htmlWithSVG, (err) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                console.log(`Check out your compiled logo in ${outputFile}`);
+            });
+        });
     }
 }
 
-init();
+init();3
