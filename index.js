@@ -56,7 +56,7 @@ function compileSVG(shape, data) {
             // Replace the placeholder with the SVG content
             const htmlWithSVG = template.replace('PLACEHOLDER_FOR_SVG_CONTENT', SVGString);
 
-            const outputFile = 'compiled_logo.html';
+            const outputFile = 'index.html';
             fs.writeFile(outputFile, htmlWithSVG, (err) => {
                 if (err) {
                     console.log(err);
