@@ -1,9 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { Circle, Triangle, Square } = require("./lib")
-// const { SVGGenerator, generateSVG } = require('./lib/shapes.js');
+const { Circle, Triangle, Square } = require("./lib/function")
 
-
+//inquirer goes here
 const questions = [
     {
         type: "list",
@@ -28,25 +27,20 @@ const questions = [
     },
 ]
 
-
+//starts app
 function init() {
     inquirer
         .prompt(questions)
         .then((data) => {
             console.log(data);
             compileSVG(data.shape, data);
+            if(data.letters.length != 3){
+                throw new Error("Please enter three letters for the logo.");
+            };
         })
-    // if(data.letters.length != 3){
-    //     throw new Error("Please enter three letters for the logo.");
-    // };
-
-    // const color = data.color.toLowerCase();
-    // const textColor = data.textColor.toLowerCase();
-    // let logoData = generateSVG(data.shape, color, textColor, data.letters,);
-
 
 };
-
+// Uses an if/else statement to check shape first, runs SVGgenerator based on that choice. 
 function compileSVG(shape, data) {
     console.log(data);
     if (shape === "Circle") {
